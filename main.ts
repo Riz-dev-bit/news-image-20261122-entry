@@ -2,6 +2,7 @@ import * as crypto from 'node:crypto';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as process from 'node:process';
+import { fileURLToPath } from 'node:url';
 import * as zlib from 'node:zlib';
 
 const MAX_FILE_SIZE = 1_048_576; // 1 MB (1024 * 1024 bytes)
@@ -10,7 +11,7 @@ const REQUIRED_HEIGHT = 1024;
 const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
 function main(): void {
-  const inputPath = path.resolve('entry.png');
+  const inputPath = fileURLToPath(new URL('./entry.png', import.meta.url));
   const outputDir = process.env.MAKEFUN_OUTPUT_DIR || '/output';
   const outputPath = path.join(outputDir, 'entry.png');
 
